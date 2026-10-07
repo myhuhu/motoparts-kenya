@@ -1,0 +1,72 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens. tailwind.config.js maps charcoal.* -> --color-charcoal-* and
+   white -> --color-foreground, so every existing utility (including the
+   /opacity modifiers) re-themes from these alone. Light is the default. */
+:root,
+[data-theme="light"] {
+  --color-charcoal-950: 247 247 248; /* page background */
+  --color-charcoal-900: 255 255 255; /* cards, inputs */
+  --color-charcoal-800: 240 240 243; /* raised / inset surfaces */
+  --color-charcoal-700: 226 228 232; /* hover fills */
+  --color-charcoal-600: 205 208 214; /* borders, dividers */
+  --color-foreground: 20 21 26; /* text */
+  --color-on-ember: 20 21 26; /* text on ember fills */
+}
+
+[data-theme="dark"] {
+  --color-charcoal-950: 13 13 15; /* page background */
+  --color-charcoal-900: 22 22 26; /* cards, inputs */
+  --color-charcoal-800: 31 31 36; /* raised / inset surfaces */
+  --color-charcoal-700: 42 42 48; /* hover fills */
+  --color-charcoal-600: 58 58 66; /* borders, dividers */
+  --color-foreground: 255 255 255; /* text */
+  --color-on-ember: 13 13 15; /* text on ember fills */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-charcoal-950 text-white font-body antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+::selection {
+  background-color: #ff6a2b;
+  color: rgb(var(--color-on-ember));
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-ember-500 hover:bg-ember-600 text-on-ember font-semibold px-6 py-3 rounded-sm transition-colors duration-150;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 border border-white/20 hover:border-ember-500 hover:text-ember-500 text-white font-semibold px-6 py-3 rounded-sm transition-colors duration-150;
+}
+
+.input-field {
+  @apply w-full bg-charcoal-900 border border-white/10 focus:border-ember-500 outline-none rounded-sm px-4 py-2.5 text-sm placeholder:text-white/40 transition-colors;
+}
+
+.card {
+  @apply bg-charcoal-900 border border-charcoal-600/50 rounded-sm;
+}
+
+/* Rich-text content (admin editor + product description) */
+.rich-text ul { @apply list-disc pl-5 my-2; }
+.rich-text ol { @apply list-decimal pl-5 my-2; }
+.rich-text a { @apply text-ember-500 underline; }
+.rich-text code { @apply bg-white/10 rounded px-1 py-0.5 text-[0.85em]; }
+.rte:empty:before { content: attr(data-placeholder); color: rgb(var(--color-foreground) / 0.35); pointer-events: none; }
